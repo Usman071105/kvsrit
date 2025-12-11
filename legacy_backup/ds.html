@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjects Page</title>
+    <script src="syllabusscript"></script>
+    <script src="syllabusscript1"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+        }
+        #searchBar {
+            width: 80%;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #subjectList {
+            list-style-type: none;
+            padding: 0;
+            width: 80%;
+        }
+        #subjectList li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #subjectList li a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        #subjectList li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Subjects</h1>
+    <input type="text" id="searchBar" placeholder="Search for a subject..." onkeyup="searchSubjects()">
+    <ul id="subjectList">
+        <li><a href="C:\Users\masta\Downloads\ideathon.pdf" target-="_blank">Engineering Mathematics</a></li>
+        <li><a href="path/to/subject2.pdf" target="blank">Physics for Engineers</a></li>
+        <li><a href="path/to/subject3.pdf" target="_blank">Chemistry for Engineers</a></li>
+        <li><a href="path/to/subject4.pdf" target="_blank">Introduction to Programming</a></li>
+        <li><a href="path/to/subject5.pdf" target="_blank">Data Structures</a></li>
+        <li><a href="path/to/subject6.pdf" target="_blank">Algorithms</a></li>
+        <li><a href="path/to/subject7.pdf" target="_blank">Digital Logic Design</a></li>
+        <li><a href="path/to/subject8.pdf" target="_blank">Computer Organization</a></li>
+        <li><a href="path/to/subject9.pdf" target="_blank">Operating Systems</a></li>
+        <li><a href="path/to/subject10.pdf" target="_blank">Database Management Systems</a></li>
+        <li><a href="path/to/subject11.pdf" target="_blank">Software Engineering</a></li>
+        <li><a href="path/to/subject12.pdf" target="_blank">Computer Networks</a></li>
+        <li><a href="path/to/subject13.pdf" target="_blank">Theory of Computation</a></li>
+        <li><a href="path/to/subject14.pdf" target="_blank">Artificial Intelligence</a></li>
+        <li><a href="path/to/subject15.pdf" target="_blank">Machine Learning</a></li>
+        <li><a href="path/to/subject16.pdf" target="_blank">Web Technologies</a></li>
+        <li><a href="path/to/subject17.pdf" target="_blank">Mobile Computing</a></li>
+        <li><a href="path/to/subject18.pdf" target="_blank">Cloud Computing</a></li>
+        <li><a href="path/to/subject19.pdf" target="_blank">Cyber Security</a></li>
+        <li><a href="path/to/subject20.pdf" target="_blank">Internet of Things</a></li>
+        <li><a href="path/to/subject21.pdf" target="_blank">Embedded Systems</a></li>
+        <li><a href="path/to/subject22.pdf" target="_blank">Control Systems</a></li>
+        <li><a href="path/to/subject23.pdf" target="_blank">Signal Processing</a></li>
+        <li><a href="path/to/subject24.pdf" target="_blank">VLSI Design</a></li>
+        <li><a href="path/to/subject25.pdf" target="_blank">Robotics</a></li>
+        <li><a href="path/to/subject26.pdf" target="_blank">Digital Image Processing</a></li>
+        <li><a href="path/to/subject27.pdf" target="_blank">Computer Graphics</a></li>
+        <li><a href="path/to/subject28.pdf" target="_blank">Human-Computer Interaction</a></li>
+        <li><a href="path/to/subject29.pdf" target="_blank">Software Testing</a></li>
+        <li><a href="path/to/subject30.pdf" target="_blank">Big Data Analytics</a></li>
+        <li><a href="path/to/subject31.pdf" target="_blank">Blockchain Technology</a></li>
+        <li><a href="path/to/subject32.pdf" target="_blank">Quantum Computing</a></li>
+        <li><a href="path/to/subject33.pdf" target="_blank">Renewable Energy Systems</a></li>
+        <li><a href="path/to/subject34.pdf" target="_blank">Environmental Engineering</a></li>
+        <li><a href="path/to/subject35.pdf" target="_blank">Structural Analysis</a></li>
+        <li><a href="path/to/subject36.pdf" target="_blank">Fluid Mechanics</a></li>
+        <li><a href="path/to/subject37.pdf" target="_blank">Thermodynamics</a></li>
+        <li><a href="path/to/subject38.pdf" target="_blank">Heat Transfer</a></li>
+        <li><a href="path/to/subject39.pdf" target="_blank">Manufacturing Processes</a></li>
+        <li><a href="path/to/subject40.pdf" target="_blank">Engineering Ethics</a></li>
+    </ul>
+
+    <script>
+        function searchSubjects() {
+            const input = document.getElementById('searchBar').value.toLowerCase();
+            const ul = document.getElementById('subjectList');
+            const li = ul.getElementsByTagName('li');
+
+            for (let i = 0; i < li.length; i++) {
+                const a = li[i].getElementsByTagName('a')[0];
+                const textValue = a.textContent || a.innerText;
+                if (textValue.toLowerCase().indexOf(input) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.Tech Timetable Upload</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+    
+    .year-container {
+        margin-bottom: 20px;
+        padding: 10px;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    .section {
+        margin-top: 10px;
+    }
+    
+    h1, h2, h3 {
+        color: #333;
+    }
+</style>
+<body>
+    <h1>B.Tech Timetable Upload</h1>
+
+    <div class="year-container">
+        <h2>1st Year</h2>
+        <div class="section" id="year1">
+            <h3>Section A</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year1a')">
+            <a id="year1a" href="#" target="_blank">Open Uploaded File</a>
+            <h3>Section B</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year1b')">
+            <a id="year1b" href="#" target="_blank">Open Uploaded File</a>
+            <h3>Section C</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year1c')">
+            <a id="year1c" href="#" target="_blank">Open Uploaded File</a>
+        </div>
+    </div><div class="year-container">
+        <h2>2nd Year</h2>
+        <div class="section" id="year2">
+            <h3>Section A</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year2a')">
+            <a id="year2a" href="#" target="_blank">Open Uploaded File</a>
+            <h3>Section B</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year2b')">
+            <a id="year2b" href="#" target="_blank">Open Uploaded File</a>
+            <h3>Section C</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year2c')">
+            <a id="year2c" href="#" target="_blank">Open Uploaded File</a>
+        </div>
+    </div>
+    <div class="year-container">
+        <h2>3rd Year</h2>
+        <div class="section" id="year3">
+            <h3>Section A</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year3a')">
+            <a id="year3a" href="#" target="_blank">Open Uploaded File</a>
+            <h3>Section B</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year3b')">
+            <a id="year3b" href="#" target="_blank">Open Uploaded File</a>
+            <h3>Section C</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year3c')">
+            <a id="year3c" href="#" target="_blank">Open Uploaded File</a>
+        </div>
+    </div>
+    <div class="year-container">
+        <h2>4th Year</h2>
+        <div class="section" id="year4">
+            <h3>Section A</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year4a')">
+            <a id="year4a" href="#" target="_blank">Open Uploaded File</a>
+            <h3>Section B</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year4b')">
+            <a id="year4b" href="#" target="_blank">Open Uploaded File</a>
+            <h3>Section C</h3>
+            <input type="file" accept=".pdf,image/*" onchange="uploadFile(event, 'year4c')">
+            <a id="year4c" href="#" target="_blank">Open Uploaded File</a>
+        </div>
+    </div>
+    <script>
+        function uploadFile(event, linkId) {
+            const file = event.target.files[0];
+            const link = document.getElementById(linkId);
+        
+            if (file) {
+                const url = URL.createObjectURL(file);
+                link.href = url;
+                link.textContent = "Open Uploaded File";
+            }
+        }
+    </script>
+</body>
+</html>

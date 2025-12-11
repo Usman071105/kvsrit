@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Submission Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .complaint-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type=text], input[type=email], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type=file] {
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #successMessage {
+            margin-top: 20px;
+            color: green;
+            text-align: center;
+        }
+        .complaint-list {
+            margin-top: 30px;
+        }
+        .complaint-item {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="complaint-form">
+    <h2>Complaint Submission Form</h2>
+    <form id="complaintForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="complaint">Your Complaint:</label>
+        <textarea id="complaint" name="complaint" rows="4" required></textarea>
+
+        <label for="file">Upload Supporting Document:</label>
+        <input type="file" id="file" name="file">
+
+        <button type="submit">Submit Complaint</button>
+    </form>
+    <!-- Success Message -->
+    <div id="successMessage"></div>
+</div>
+
+<div class="complaint-list" id="complaintList">
+    <h2>Submitted Complaints</h2>
+    <!-- Complaints will be displayed here -->
+</div>
+
+<script>
+// Array to store complaints
+const complaints = [];
+
+// JavaScript to handle form submission
+document.getElementById('complaintForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get form values
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const complaintText = document.getElementById('complaint').value.trim();
+
+    // Create a complaint object
+    const complaint = {
+        name,
+        email,
+        text: complaintText,
+    };
+
+    // Add the complaint to the array
+    complaints.push(complaint);
+
+    // Display success message
+    document.getElementById('successMessage').innerText = 'Thank you! Your complaint has been submitted.';
+    
+    // Reset the form
+    this.reset();
+
+    // Update the displayed list of complaints
+    displayComplaints();
+});
+
+// Function to display all complaints
+function displayComplaints() {
+    const complaintListDiv = document.getElementById('complaintList');
+    
+    // Clear existing complaints
+    complaintListDiv.innerHTML = '<h2>Submitted Complaints</h2>';
+
+    // Check if there are any complaints to display
+    if (complaints.length === 0) {
+        complaintListDiv.innerHTML += '<p>No complaints submitted yet.</p>';
+        return; // Exit if no complaints
+    }
+
+    // Loop through each complaint and create HTML elements to display them
+    complaints.forEach((complaint, index) => {
+        const complaintItem = document.createElement('div');
+        complaintItem.className = 'complaint-item';
+        
+        // Constructing the content of each complaint item
+        complaintItem.innerHTML = `
+            <strong>${complaint.name} (${complaint.email})</strong><br>
+            ${complaint.text}
+        `;
+        
+        // Append the new complaint item to the list
+        complaintListDiv.appendChild(complaintItem);
+    });
+}
+</script>
+
+</body>
+</html>
