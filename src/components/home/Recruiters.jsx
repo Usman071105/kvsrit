@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import { Briefcase } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const recruiters = [
     { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/200px-Tata_Consultancy_Services_Logo.svg.png' },
@@ -14,6 +15,13 @@ const recruiters = [
     { name: 'Capgemini', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Capgemini_201x_logo.svg/200px-Capgemini_201x_logo.svg.png' },
 ]
 
+const placementStats = [
+    { value: '100+', label: 'Recruiting Companies' },
+    { value: '95%', label: 'Placement Rate' },
+    { value: '₹12L', label: 'Highest Package' },
+    { value: '₹4.5L', label: 'Average Package' },
+]
+
 const RecruiterLogo = ({ recruiter, index }) => {
     const [imageLoaded, setImageLoaded] = useState(false)
     const [imageError, setImageError] = useState(false)
@@ -23,24 +31,23 @@ const RecruiterLogo = ({ recruiter, index }) => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.05 }}
-            className="min-w-[160px] h-24 bg-white rounded-xl border border-[var(--color-border)] flex items-center justify-center p-4 mx-3 hover:shadow-lg hover:border-[var(--color-primary-light)] transition-all"
+            className="min-w-[200px] h-32 bg-white rounded-2xl border-2 border-[var(--color-border)] flex items-center justify-center p-6 mx-4 hover:shadow-xl hover:border-[var(--color-primary-light)] hover:-translate-y-2 transition-all duration-300"
         >
             {!imageError ? (
                 <img
                     src={recruiter.logo}
                     alt={recruiter.name}
-                    className={`max-h-12 max-w-[120px] object-contain transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'
-                        }`}
+                    className={`max-h-16 max-w-[150px] object-contain transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                     onLoad={() => setImageLoaded(true)}
                     onError={() => setImageError(true)}
                 />
             ) : (
-                <span className="text-lg font-semibold text-[var(--color-text-secondary)] font-['Outfit']">
+                <span className="text-xl font-bold text-[var(--color-text-secondary)] font-['Outfit']">
                     {recruiter.name}
                 </span>
             )}
             {!imageLoaded && !imageError && (
-                <div className="w-20 h-8 skeleton rounded" />
+                <div className="w-28 h-12 skeleton rounded-lg" />
             )}
         </motion.div>
     )
@@ -68,17 +75,17 @@ const Recruiters = () => {
     }, [])
 
     return (
-        <section id="recruiters" className="section bg-[var(--color-surface)]">
-            <div className="container mx-auto px-4" ref={containerRef}>
+        <section id="recruiters" className="py-20 md:py-28 bg-[var(--color-surface)]">
+            <div className="max-w-7xl mx-auto px-8 md:px-12 lg:px-16" ref={containerRef}>
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-12"
+                    className="text-center mb-20"
                 >
-                    <h2 className="section-title title-underline">Our Key Recruiters</h2>
-                    <p className="section-subtitle mt-6">
+                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] font-['Outfit'] title-underline inline-block">Our Key Recruiters</h2>
+                    <p className="text-[var(--color-text-secondary)] max-w-xl mx-auto mt-10 text-lg">
                         Leading companies trust Dr. KVSRIT for hiring talented and industry-ready graduates.
                     </p>
                 </motion.div>
@@ -88,66 +95,60 @@ const Recruiters = () => {
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ delay: 0.3, duration: 0.6 }}
-                    className="relative overflow-hidden"
+                    className="relative overflow-hidden py-6"
                 >
                     {/* Gradient Masks */}
-                    <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[var(--color-surface)] to-transparent z-10" />
-                    <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--color-surface)] to-transparent z-10" />
+                    <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[var(--color-surface)] to-transparent z-10" />
+                    <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[var(--color-surface)] to-transparent z-10" />
 
                     {/* Scrolling Container */}
                     <div
                         ref={scrollRef}
-                        className="flex overflow-x-auto scrollbar-hide py-4"
+                        className="flex overflow-x-auto scrollbar-hide py-3"
                         style={{ scrollBehavior: 'auto' }}
                     >
-                        {/* Double the items for seamless loop */}
                         {[...recruiters, ...recruiters].map((recruiter, index) => (
                             <RecruiterLogo key={`${recruiter.name}-${index}`} recruiter={recruiter} index={index} />
                         ))}
                     </div>
                 </motion.div>
 
-                {/* Stats Row */}
+                {/* Stats Row - LARGER with more padding */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.5, duration: 0.5 }}
-                    className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6"
+                    className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
                 >
-                    {[
-                        { value: '100+', label: 'Recruiting Companies' },
-                        { value: '95%', label: 'Placement Rate' },
-                        { value: '₹12L', label: 'Highest Package' },
-                        { value: '₹4.5L', label: 'Average Package' },
-                    ].map((stat, index) => (
+                    {placementStats.map((stat, index) => (
                         <div
                             key={index}
-                            className="text-center p-4 bg-white rounded-xl border border-[var(--color-border)]"
+                            className="text-center p-8 bg-white rounded-3xl border-2 border-[var(--color-border)] hover:border-[var(--color-primary-light)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                         >
-                            <p className="text-2xl md:text-3xl font-bold text-[var(--color-primary)] font-['Outfit']">
+                            <p className="text-4xl md:text-5xl font-bold text-[var(--color-primary)] font-['Outfit']">
                                 {stat.value}
                             </p>
-                            <p className="text-sm text-[var(--color-text-secondary)] mt-1">
+                            <p className="text-base font-semibold text-[var(--color-text-secondary)] mt-3">
                                 {stat.label}
                             </p>
                         </div>
                     ))}
                 </motion.div>
 
-                {/* CTA */}
+                {/* CTA - LARGER button */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.7, duration: 0.5 }}
-                    className="text-center mt-10"
+                    className="text-center mt-14"
                 >
-                    <a
-                        href="#placements"
-                        className="btn btn-outline inline-flex items-center gap-2"
+                    <Link
+                        to="/placements"
+                        className="btn btn-outline inline-flex items-center gap-3 px-10 py-5 rounded-2xl text-lg font-semibold border-2"
                     >
-                        <Briefcase size={18} />
+                        <Briefcase size={24} strokeWidth={1.5} />
                         View Placement Record
-                    </a>
+                    </Link>
                 </motion.div>
             </div>
         </section>

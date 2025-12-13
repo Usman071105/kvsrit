@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { Newspaper, ClipboardList, Briefcase, FileText, Calendar, ExternalLink } from 'lucide-react'
+import { Newspaper, ClipboardList, Briefcase, FileText, Calendar, ExternalLink, ChevronRight } from 'lucide-react'
 
 const tabs = [
     { id: 'news', label: 'News & Events', icon: Newspaper },
@@ -47,38 +47,38 @@ const NewsEvents = () => {
     const isInView = useInView(containerRef, { once: true, margin: '-100px' })
 
     return (
-        <section id="events" className="section bg-[var(--color-background)]">
-            <div className="container mx-auto px-4" ref={containerRef}>
+        <section id="events" className="py-20 md:py-28 bg-[var(--color-background)]">
+            <div className="max-w-7xl mx-auto px-8 md:px-12 lg:px-16" ref={containerRef}>
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-12"
+                    className="text-center mb-20"
                 >
-                    <h2 className="section-title title-underline">Latest Updates</h2>
-                    <p className="section-subtitle mt-6">
+                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] font-['Outfit'] title-underline inline-block">Latest Updates</h2>
+                    <p className="text-[var(--color-text-secondary)] max-w-xl mx-auto mt-10 text-lg">
                         Stay updated with the latest news, events, examination schedules, and important circulars.
                     </p>
                 </motion.div>
 
-                {/* Tabs */}
+                {/* Tabs - LARGER with better padding */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.2, duration: 0.5 }}
-                    className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8"
+                    className="flex flex-wrap justify-center gap-4 md:gap-5 mb-14"
                 >
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`flex items-center gap-2 px-4 md:px-6 py-3 rounded-xl font-medium text-sm transition-all ${activeTab === tab.id
-                                    ? 'bg-[var(--color-primary)] text-white shadow-lg'
-                                    : 'bg-white text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-primary-light)]'
+                            className={`flex items-center gap-3 px-7 md:px-9 py-4 md:py-5 rounded-2xl font-semibold text-base transition-all duration-300 ${activeTab === tab.id
+                                    ? 'bg-[var(--color-primary)] text-white shadow-xl shadow-[var(--color-primary)]/30'
+                                    : 'bg-white text-[var(--color-text-secondary)] border-2 border-[var(--color-border)] hover:border-[var(--color-primary-light)] hover:bg-[var(--color-surface)]'
                                 }`}
                         >
-                            <tab.icon size={18} />
+                            <tab.icon size={22} strokeWidth={1.5} />
                             <span className="hidden sm:inline">{tab.label}</span>
                         </button>
                     ))}
@@ -89,7 +89,7 @@ const NewsEvents = () => {
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ delay: 0.3, duration: 0.5 }}
-                    className="max-w-4xl mx-auto"
+                    className="max-w-5xl mx-auto"
                 >
                     <AnimatePresence mode="wait">
                         <motion.div
@@ -98,19 +98,17 @@ const NewsEvents = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
-                            className="bg-white rounded-2xl border border-[var(--color-border)] overflow-hidden shadow-sm"
+                            className="bg-white rounded-3xl border-2 border-[var(--color-border)] overflow-hidden shadow-lg"
                         >
-                            {/* Header */}
-                            <div className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] px-6 py-4">
-                                <h3 className="text-lg font-semibold text-white flex items-center gap-2 font-['Outfit']">
-                                    {tabs.find((t) => t.id === activeTab)?.icon && (
-                                        <span className="p-1.5 bg-white/20 rounded-lg">
-                                            {(() => {
-                                                const Icon = tabs.find((t) => t.id === activeTab)?.icon
-                                                return Icon ? <Icon size={18} /> : null
-                                            })()}
-                                        </span>
-                                    )}
+                            {/* Header with icon */}
+                            <div className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] px-10 py-6">
+                                <h3 className="text-xl font-bold text-white flex items-center gap-4 font-['Outfit']">
+                                    <span className="p-3 bg-white/20 rounded-xl">
+                                        {(() => {
+                                            const Icon = tabs.find((t) => t.id === activeTab)?.icon
+                                            return Icon ? <Icon size={24} strokeWidth={1.5} /> : null
+                                        })()}
+                                    </span>
                                     {tabs.find((t) => t.id === activeTab)?.label}
                                 </h3>
                             </div>
@@ -124,26 +122,27 @@ const NewsEvents = () => {
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: index * 0.05 }}
-                                        className="flex items-center gap-4 px-6 py-4 hover:bg-[var(--color-surface)] transition-colors group"
+                                        className="flex items-center gap-6 px-10 py-6 hover:bg-[var(--color-surface)] transition-colors group"
                                     >
-                                        {/* Date */}
-                                        <div className="flex-shrink-0 w-20 text-center">
-                                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-[var(--color-primary)]/10 rounded-lg">
-                                                <Calendar size={12} className="text-[var(--color-primary)]" />
-                                                <span className="text-xs font-medium text-[var(--color-primary)]">
+                                        {/* Date Badge - LARGER */}
+                                        <div className="flex-shrink-0">
+                                            <div className="inline-flex items-center gap-2.5 px-5 py-3 bg-[var(--color-primary)]/10 rounded-xl min-w-[110px] justify-center">
+                                                <Calendar size={18} className="text-[var(--color-primary)]" strokeWidth={1.5} />
+                                                <span className="text-sm font-bold text-[var(--color-primary)]">
                                                     {item.date}
                                                 </span>
                                             </div>
                                         </div>
 
                                         {/* Title */}
-                                        <p className="flex-1 text-[var(--color-text-primary)] text-sm group-hover:text-[var(--color-primary)] transition-colors">
+                                        <p className="flex-1 text-[var(--color-text-primary)] text-base font-medium group-hover:text-[var(--color-primary)] transition-colors leading-relaxed">
                                             {item.title}
                                         </p>
 
-                                        {/* Link Icon */}
+                                        {/* Link Icon - LARGER */}
                                         <ExternalLink
-                                            size={16}
+                                            size={22}
+                                            strokeWidth={1.5}
                                             className="flex-shrink-0 text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)] transition-colors"
                                         />
                                     </motion.a>
@@ -151,12 +150,13 @@ const NewsEvents = () => {
                             </div>
 
                             {/* View More */}
-                            <div className="px-6 py-4 bg-[var(--color-surface)] border-t border-[var(--color-border)]">
+                            <div className="px-10 py-6 bg-[var(--color-surface)] border-t-2 border-[var(--color-border)]">
                                 <a
                                     href="#all-news"
-                                    className="text-sm font-medium text-[var(--color-primary)] hover:underline"
+                                    className="inline-flex items-center gap-2.5 text-base font-bold text-[var(--color-primary)] hover:gap-4 transition-all"
                                 >
-                                    View all {tabs.find((t) => t.id === activeTab)?.label} →
+                                    View all {tabs.find((t) => t.id === activeTab)?.label}
+                                    <ChevronRight size={20} strokeWidth={2} />
                                 </a>
                             </div>
                         </motion.div>

@@ -12,6 +12,12 @@ import NewsEvents from './components/home/NewsEvents'
 import Stats from './components/home/Stats'
 import ContactSection from './components/home/ContactSection'
 import DepartmentDetail from './components/DepartmentDetail'
+import AboutPage from './pages/AboutPage'
+import AdmissionsPage from './pages/AdmissionsPage'
+import AcademicsPage from './pages/AcademicsPage'
+import PlacementsPage from './pages/PlacementsPage'
+import CampusLifePage from './pages/CampusLifePage'
+import ContactPage from './pages/ContactPage'
 
 function HomePage() {
     return (
@@ -64,6 +70,12 @@ function App() {
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/department/:code" element={<DepartmentDetail />} />
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="/admissions" element={<AdmissionsPage />} />
+                        <Route path="/academics" element={<AcademicsPage />} />
+                        <Route path="/placements" element={<PlacementsPage />} />
+                        <Route path="/campus-life" element={<CampusLifePage />} />
+                        <Route path="/contact" element={<ContactPage />} />
                     </Routes>
                     <Footer />
                 </motion.div>

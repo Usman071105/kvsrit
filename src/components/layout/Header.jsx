@@ -1,87 +1,85 @@
 import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown, Phone, Mail, MapPin, Search } from 'lucide-react'
 
 const navItems = [
     {
         label: 'Home',
-        href: '#home',
+        href: '/',
     },
     {
         label: 'About Us',
-        href: '#about',
+        href: '/about',
         children: [
-            { label: 'About Us', href: '#about' },
-            { label: 'Vision & Mission', href: '#vision' },
-            { label: 'Affiliation & Accreditation', href: '#accreditation' },
-            { label: 'Management', href: '#management' },
-            { label: 'Principal', href: '#principal' },
-            { label: 'Administration', href: '#administration' },
-            { label: 'Governing Body', href: '#governing-body' },
-            { label: 'Academic Council', href: '#academic-council' },
+            { label: 'About Us', href: '/about#about' },
+            { label: 'Vision & Mission', href: '/about#vision' },
+            { label: 'Affiliation & Accreditation', href: '/about#accreditation' },
+            { label: 'Management', href: '/about#management' },
+            { label: 'Principal', href: '/about#principal' },
+            { label: 'Administration', href: '/about#administration' },
         ],
     },
     {
         label: 'Admissions',
-        href: '#admissions',
+        href: '/admissions',
         children: [
-            { label: 'Admission Procedure', href: '#admission-procedure' },
-            { label: 'Criteria for Admission', href: '#criteria' },
-            { label: 'Programs Offered', href: '#programs' },
-            { label: 'Fee Structure', href: '#fee' },
-            { label: 'Scholarships', href: '#scholarships' },
+            { label: 'Admission Procedure', href: '/admissions#admission-procedure' },
+            { label: 'Criteria for Admission', href: '/admissions#criteria' },
+            { label: 'Programs Offered', href: '/admissions#programs' },
+            { label: 'Fee Structure', href: '/admissions#fee' },
+            { label: 'Scholarships', href: '/admissions#scholarships' },
         ],
     },
     {
         label: 'Academics',
-        href: '#academics',
+        href: '/academics',
         children: [
-            { label: 'Academic Calendar', href: '#calendar' },
-            { label: 'Regulations & Syllabus', href: '#syllabus' },
-            { label: 'Exam Cell', href: '#exam' },
-            { label: 'R&D Cell', href: '#rnd' },
-            { label: 'IQAC', href: '#iqac' },
-            { label: 'Policies', href: '#policies' },
+            { label: 'Academic Calendar', href: '/academics#calendar' },
+            { label: 'Regulations & Syllabus', href: '/academics#syllabus' },
+            { label: 'Exam Cell', href: '/academics#exam' },
+            { label: 'R&D Cell', href: '/academics#rnd' },
+            { label: 'IQAC', href: '/academics#iqac' },
+            { label: 'Policies', href: '/academics#policies' },
         ],
     },
     {
         label: 'Departments',
-        href: '#departments',
+        href: '/#courses',
         children: [
-            { label: 'Computer Science & Engineering', href: '#cse' },
-            { label: 'CSE (AI & ML)', href: '#cse-aiml' },
-            { label: 'Electronics & Communication', href: '#ece' },
-            { label: 'Electrical & Electronics', href: '#eee' },
-            { label: 'Mechanical Engineering', href: '#mech' },
-            { label: 'Civil Engineering', href: '#civil' },
-            { label: 'Humanities & Sciences', href: '#hs' },
-            { label: 'MBA', href: '#mba' },
-            { label: 'MCA', href: '#mca' },
+            { label: 'Computer Science & Engineering', href: '/department/CSE' },
+            { label: 'CSE (AI & ML)', href: '/department/CSEAIML' },
+            { label: 'Electronics & Communication', href: '/department/ECE' },
+            { label: 'Electrical & Electronics', href: '/department/EEE' },
+            { label: 'Mechanical Engineering', href: '/department/MECH' },
+            { label: 'Civil Engineering', href: '/department/CIVIL' },
+            { label: 'MBA', href: '/department/MBA' },
+            { label: 'MCA', href: '/department/MCA' },
         ],
     },
     {
         label: 'Placements',
-        href: '#placements',
+        href: '/placements',
         children: [
-            { label: 'About T&P', href: '#tp' },
-            { label: 'Placement Record', href: '#record' },
-            { label: 'Internships', href: '#internships' },
-            { label: 'News & Events', href: '#events' },
+            { label: 'About T&P', href: '/placements#tp' },
+            { label: 'Placement Record', href: '/placements#record' },
+            { label: 'Internships', href: '/placements#internships' },
+            { label: 'News & Events', href: '/placements#events' },
         ],
     },
     {
         label: 'Campus Life',
-        href: '#campus',
+        href: '/campus-life',
         children: [
-            { label: 'Facilities', href: '#facilities' },
-            { label: 'Infrastructure', href: '#infrastructure' },
-            { label: 'Events', href: '#events' },
-            { label: 'Gallery', href: '#gallery' },
+            { label: 'Facilities', href: '/campus-life#facilities' },
+            { label: 'Infrastructure', href: '/campus-life#infrastructure' },
+            { label: 'Events', href: '/campus-life#events' },
+            { label: 'Gallery', href: '/campus-life#gallery' },
         ],
     },
     {
         label: 'Contact',
-        href: '#contact',
+        href: '/contact',
     },
 ]
 
@@ -135,8 +133,8 @@ const Header = () => {
             {/* Main Navigation */}
             <motion.nav
                 className={`transition-all duration-300 ${isScrolled
-                        ? 'bg-white/95 backdrop-blur-md shadow-lg'
-                        : 'bg-white/80 backdrop-blur-sm'
+                    ? 'bg-white/95 backdrop-blur-md shadow-lg'
+                    : 'bg-white/80 backdrop-blur-sm'
                     }`}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
@@ -145,7 +143,7 @@ const Header = () => {
                 <div className="container mx-auto px-4">
                     <div className="flex items-center justify-between py-3">
                         {/* Logo */}
-                        <a href="#home" className="flex items-center gap-3 group">
+                        <Link to="/" className="flex items-center gap-3 group">
                             <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
                                 <span className="text-white font-bold text-xl font-['Outfit']">K</span>
                             </div>
@@ -157,7 +155,7 @@ const Header = () => {
                                     Institute of Technology
                                 </p>
                             </div>
-                        </a>
+                        </Link>
 
                         {/* Desktop Navigation */}
                         <div className="hidden lg:flex items-center gap-1">
@@ -168,11 +166,11 @@ const Header = () => {
                                     onMouseEnter={() => handleDropdownEnter(index)}
                                     onMouseLeave={handleDropdownLeave}
                                 >
-                                    <a
-                                        href={item.href}
+                                    <Link
+                                        to={item.href}
                                         className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all ${activeDropdown === index
-                                                ? 'bg-[var(--color-primary)] text-white'
-                                                : 'text-[var(--color-text-primary)] hover:bg-[var(--color-primary-light)]/20'
+                                            ? 'bg-[var(--color-primary)] text-white'
+                                            : 'text-[var(--color-text-primary)] hover:bg-[var(--color-primary-light)]/20'
                                             }`}
                                     >
                                         {item.label}
@@ -182,7 +180,7 @@ const Header = () => {
                                                 className={`transition-transform ${activeDropdown === index ? 'rotate-180' : ''}`}
                                             />
                                         )}
-                                    </a>
+                                    </Link>
 
                                     {/* Dropdown */}
                                     <AnimatePresence>
@@ -196,13 +194,13 @@ const Header = () => {
                                             >
                                                 <div className="py-2">
                                                     {item.children.map((child, childIndex) => (
-                                                        <a
+                                                        <Link
                                                             key={childIndex}
-                                                            href={child.href}
+                                                            to={child.href}
                                                             className="block px-4 py-2.5 text-sm text-[var(--color-text-primary)] hover:bg-[var(--color-primary-light)]/20 hover:text-[var(--color-primary)] transition-colors"
                                                         >
                                                             {child.label}
-                                                        </a>
+                                                        </Link>
                                                     ))}
                                                 </div>
                                             </motion.div>
@@ -251,24 +249,24 @@ const Header = () => {
                             <div className="container mx-auto px-4 py-4 max-h-[70vh] overflow-y-auto">
                                 {navItems.map((item, index) => (
                                     <div key={index} className="border-b border-[var(--color-border)] last:border-0">
-                                        <a
-                                            href={item.href}
+                                        <Link
+                                            to={item.href}
                                             className="block py-3 text-[var(--color-text-primary)] font-medium"
                                             onClick={() => !item.children && setIsMobileMenuOpen(false)}
                                         >
                                             {item.label}
-                                        </a>
+                                        </Link>
                                         {item.children && (
                                             <div className="pl-4 pb-2">
                                                 {item.children.map((child, childIndex) => (
-                                                    <a
+                                                    <Link
                                                         key={childIndex}
-                                                        href={child.href}
+                                                        to={child.href}
                                                         className="block py-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]"
                                                         onClick={() => setIsMobileMenuOpen(false)}
                                                     >
                                                         {child.label}
-                                                    </a>
+                                                    </Link>
                                                 ))}
                                             </div>
                                         )}
