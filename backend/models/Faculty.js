@@ -65,5 +65,6 @@ const facultySchema = new mongoose.Schema({
 // Index for efficient queries
 facultySchema.index({ department: 1, order: 1 });
 facultySchema.index({ isActive: 1 });
+facultySchema.index({ name: 'text', department: 'text', designation: 'text', specialization: 'text', qualification: 'text' });
 
 module.exports = mongoose.model('Faculty', facultySchema);

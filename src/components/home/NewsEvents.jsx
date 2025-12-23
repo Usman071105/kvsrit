@@ -49,7 +49,7 @@ const NewsEvents = () => {
 
     return (
         <section id="events" className="events-section">
-            <div className="container mx-auto px-4 md:px-6" ref={containerRef}>
+            <div className="container px-4 md:px-6" ref={containerRef}>
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -60,7 +60,7 @@ const NewsEvents = () => {
                     <h2 className="section-title title-underline inline-block">Latest Updates</h2>
                 </motion.div>
 
-                <div className="max-w-5xl mx-auto">
+                <div className="w-full">
                     {/* Tabs - Centered */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

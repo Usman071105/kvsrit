@@ -24,4 +24,7 @@ const newsSchema = new mongoose.Schema({
     }
 });
 
+// Text index for search
+newsSchema.index({ title: 'text', category: 'text' });
+
 module.exports = mongoose.model('News', newsSchema);

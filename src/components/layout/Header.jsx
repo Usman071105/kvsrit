@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown, Phone, Mail, MapPin, Search } from 'lucide-react'
+import SearchModal from './SearchModal'
+import './Header.css'
+import { BRAND } from '../../config/brand'
 
 const navItems = [
     {
@@ -88,6 +91,7 @@ const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [activeDropdown, setActiveDropdown] = useState(null)
+    const [isSearchOpen, setIsSearchOpen] = useState(false)
     const location = useLocation()
 
     useEffect(() => {
@@ -127,7 +131,7 @@ const Header = () => {
         <header className="fixed top-0 left-0 right-0 z-50">
             {/* Top Bar */}
             <div className="bg-[var(--color-primary-dark)] text-white py-2 hidden md:block">
-                <div className="container mx-auto px-4 flex justify-between items-center text-sm">
+                <div className="container px-4 flex justify-between items-center text-sm">
                     <div className="flex items-center gap-6">
                         <a href="tel:9704333789" className="flex items-center gap-2 hover:text-[var(--color-accent-light)] transition-colors">
                             <Phone size={14} />
@@ -158,19 +162,19 @@ const Header = () => {
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <div className="container mx-auto px-4">
+                <div className="container px-4">
                     <div className="flex items-center justify-between py-3">
                         {/* Logo */}
-                        <Link to="/" className="flex items-center gap-3 group">
-                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                                <span className="text-white font-bold text-xl font-['Outfit']">K</span>
+                        <Link to="/" className="header-brand group" aria-label={`Home - ${BRAND.fullName}`}>
+                            <div className="brand-circle group-hover:scale-105">
+                                <span className="brand-initial" aria-hidden="true">{BRAND.initial}</span>
                             </div>
-                            <div className="hidden sm:block">
-                                <h1 className="text-lg font-bold text-[var(--color-text-primary)] leading-tight font-['Outfit']">
-                                    Dr. K.V. Subba Reddy
+                            <div className="brand-text hidden sm:block">
+                                <h1 className="brand-name">
+                                    {BRAND.lines[0]}
                                 </h1>
-                                <p className="text-xs text-[var(--color-text-secondary)]">
-                                    Institute of Technology
+                                <p className="brand-subtitle">
+                                    {BRAND.lines[1]}
                                 </p>
                             </div>
                         </Link>
@@ -239,7 +243,11 @@ const Header = () => {
                             </div>
 
                             {/* Search Button */}
-                            <button className="p-2 rounded-lg hover:bg-[var(--color-primary-light)]/20 transition-colors">
+                            <button
+                                className="p-2 rounded-lg hover:bg-[var(--color-primary-light)]/20 transition-colors"
+                                onClick={() => setIsSearchOpen(true)}
+                                aria-label="Open search"
+                            >
                                 <Search size={20} className="text-[var(--color-text-primary)]" />
                             </button>
 
@@ -268,7 +276,7 @@ const Header = () => {
                             exit={{ opacity: 0, height: 0 }}
                             className="lg:hidden bg-white border-t border-[var(--color-border)]"
                         >
-                            <div className="container mx-auto px-4 py-4 max-h-[70vh] overflow-y-auto">
+                            <div className="container px-4 py-4 max-h-[70vh] overflow-y-auto">
                                 {navItems.map((item, index) => (
                                     <div key={index} className="border-b border-[var(--color-border)] last:border-0">
                                         <Link
@@ -300,6 +308,11 @@ const Header = () => {
                     )}
                 </AnimatePresence>
             </motion.nav>
+
+            <SearchModal
+                isOpen={isSearchOpen}
+                onClose={() => setIsSearchOpen(false)}
+            />
         </header>
     )
 }

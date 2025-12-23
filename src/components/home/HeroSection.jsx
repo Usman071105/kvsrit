@@ -5,21 +5,24 @@ import { ChevronLeft, ChevronRight, Award, GraduationCap, Building } from 'lucid
 const slides = [
     {
         id: 1,
-        image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=1600&h=900&fit=crop',
+        image: null,
+        bgClass: 'hero-fallback-1',
         title: 'Welcome to Dr. KVSRIT',
         subtitle: 'Excellence in Engineering Education',
         badge: 'NAAC A+ Accredited',
     },
     {
         id: 2,
-        image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&h=900&fit=crop',
+        image: null,
+        bgClass: 'hero-fallback-2',
         title: 'Shaping Future Engineers',
         subtitle: 'Affiliated to JNTUA & Approved by AICTE',
         badge: 'NBA Accredited Programs',
     },
     {
         id: 3,
-        image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1600&h=900&fit=crop',
+        image: null,
+        bgClass: 'hero-fallback-3',
         title: 'World-Class Infrastructure',
         subtitle: 'State-of-the-art laboratories and facilities',
         badge: 'Top 100 College Rank',
@@ -39,13 +42,16 @@ const HeroSection = () => {
     }, [])
 
     useEffect(() => {
-        // Preload images
         slides.forEach((slide, index) => {
-            const img = new Image()
-            img.onload = () => {
+            if (slide.image) {
+                const img = new Image()
+                img.onload = () => {
+                    setImagesLoaded((prev) => ({ ...prev, [index]: true }))
+                }
+                img.src = slide.image
+            } else {
                 setImagesLoaded((prev) => ({ ...prev, [index]: true }))
             }
-            img.src = slide.image
         })
     }, [])
 
@@ -71,9 +77,8 @@ const HeroSection = () => {
                 >
                     {/* Image with loading state */}
                     <div
-                        className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ${imagesLoaded[currentSlide] ? 'image-loaded' : 'image-loading'
-                            }`}
-                        style={{ backgroundImage: `url(${slides[currentSlide].image})` }}
+                        className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ${imagesLoaded[currentSlide] ? 'image-loaded' : 'image-loading'} ${slides[currentSlide].bgClass || ''}`}
+                        style={slides[currentSlide].image ? { backgroundImage: `url(${slides[currentSlide].image})` } : undefined}
                     />
 
                     {/* Gradient Overlay */}
@@ -84,7 +89,7 @@ const HeroSection = () => {
 
             {/* Content */}
             <div className="relative z-10 h-full flex items-center">
-                <div className="container mx-auto px-4 pt-20">
+                <div className="container px-4 pt-20">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentSlide}
@@ -92,7 +97,7 @@ const HeroSection = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -30 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="max-w-3xl"
+                            className="w-full"
                         >
                             {/* Badge */}
                             <motion.div
@@ -170,8 +175,8 @@ const HeroSection = () => {
                         key={index}
                         onClick={() => setCurrentSlide(index)}
                         className={`transition-all duration-300 rounded-full ${currentSlide === index
-                                ? 'w-8 h-3 bg-[var(--color-accent)]'
-                                : 'w-3 h-3 bg-white/40 hover:bg-white/60'
+                            ? 'w-8 h-3 bg-[var(--color-accent)]'
+                            : 'w-3 h-3 bg-white/40 hover:bg-white/60'
                             }`}
                     />
                 ))}

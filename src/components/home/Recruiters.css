@@ -11,9 +11,9 @@
 }
 
 .recruiters-container {
-    max-width: 72rem;
-    /* max-w-6xl */
-    margin: 0 auto;
+    
+    /* w-full */
+    margin: 0;
     padding: 0 1rem;
 }
 
@@ -40,8 +40,8 @@
 
 .recruiters-description {
     color: var(--color-text-secondary);
-    max-width: 42rem;
-    /* max-w-2xl */
+    
+    /* w-full */
     margin: 2.5rem auto 0;
     /* mt-10 */
     font-size: 1.125rem;
@@ -99,7 +99,7 @@
 .recruiter-logo {
     max-height: 4rem;
     /* h-16 */
-    max-width: 150px;
+    
     object-fit: contain;
     transition: opacity 0.3s;
 }
@@ -193,4 +193,64 @@
     /* text-lg */
     font-weight: 600;
     border-width: 2px;
+}
+
+/* Active Logo Stage */
+.active-logo-stage-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.active-logo-stage {
+    position: relative;
+    width: 100%;
+    
+    min-height: 160px;
+    border-radius: 1rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.active-logo-img {
+    width: 80%;
+    height: 140px;
+    object-fit: contain;
+    will-change: transform, opacity;
+}
+
+.logo-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    border: 2px solid var(--color-border);
+    background: white;
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.logo-nav:hover { background: #fff7; transform: translateY(-50%) scale(1.05); }
+.logo-nav.prev { left: 8px; }
+.logo-nav.next { right: 8px; }
+
+.active-logo-caption {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+/* Active Card highlight */
+.recruiter-card-active {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary-light) 100%);
+    border-color: transparent;
 }

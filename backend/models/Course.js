@@ -28,4 +28,7 @@ const courseSchema = new mongoose.Schema({
     }
 });
 
+// Text index for search
+courseSchema.index({ name: 'text', fullName: 'text', type: 'text' });
+
 module.exports = mongoose.model('Course', courseSchema);

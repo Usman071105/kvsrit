@@ -27,6 +27,7 @@ app.use('/api/stats', require('./routes/stats'));
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/faculty', require('./routes/faculty'));
 app.use('/api/departments', require('./routes/departments'));
+app.use('/api/search', require('./routes/search'));
 
 // Root endpoint
 app.get('/', (req, res) => {

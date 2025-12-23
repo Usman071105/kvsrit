@@ -110,5 +110,6 @@ const departmentSchema = new mongoose.Schema({
 // Index for efficient queries
 departmentSchema.index({ code: 1 });
 departmentSchema.index({ isActive: 1, order: 1 });
+departmentSchema.index({ name: 'text', fullName: 'text', code: 'text', description: 'text', overview: 'text' });
 
 module.exports = mongoose.model('Department', departmentSchema);

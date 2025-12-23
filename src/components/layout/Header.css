@@ -1,0 +1,76 @@
+/* Header Brand Styles */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+}
+
+.brand-circle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  background-color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-normal);
+}
+
+@supports (background: linear-gradient(135deg, red, blue)) {
+  .brand-circle {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  }
+}
+
+.brand-initial {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  font-size: 1.25rem;
+  font-family: 'Outfit', sans-serif;
+}
+
+.brand-text {
+  line-height: 1.2;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.brand-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-size: 1.0625rem;
+  letter-spacing: 0.01em;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.brand-subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-size: 1.0625rem;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+
+  .brand-name,
+  .brand-subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .brand-name,
+  .brand-subtitle {
+    font-size: 1.1875rem;
+  }
+}

@@ -1,18 +1,18 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import { Briefcase } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import './Recruiters.css'
 
 const recruiters = [
-    { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/1200px-Tata_Consultancy_Services_Logo.svg.png' },
-    { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg' },
-    { name: 'Wipro', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg' },
-    { name: 'Cognizant', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg' },
-    { name: 'Tech Mahindra', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Tech_Mahindra_New_Logo.svg' },
-    { name: 'HCL', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/HCLTech_new_logo.svg/1024px-HCLTech_new_logo.svg.png' },
-    { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg' },
-    { name: 'Capgemini', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_201x_logo.svg' },
+    { name: 'TCS', logo: '/logos/tcs.svg' },
+    { name: 'Infosys', logo: '/logos/infosys.svg' },
+    { name: 'Wipro', logo: '/logos/wipro.svg' },
+    { name: 'Cognizant', logo: '/logos/cognizant.svg' },
+    { name: 'Tech Mahindra', logo: '/logos/techmahindra.svg' },
+    { name: 'HCL', logo: '/logos/hcl.svg' },
+    { name: 'Accenture', logo: '/logos/accenture.svg' },
+    { name: 'Capgemini', logo: '/logos/capgemini.svg' },
 ]
 
 const placementStats = [
@@ -22,7 +22,7 @@ const placementStats = [
     { value: '₹4.5L', label: 'Average Package' },
 ]
 
-const RecruiterLogo = ({ recruiter, index }) => {
+const RecruiterLogo = ({ recruiter, index, isActive, onSelect }) => {
     const [loaded, setLoaded] = useState(false)
     const [error, setError] = useState(false)
 
@@ -32,13 +32,22 @@ const RecruiterLogo = ({ recruiter, index }) => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.05 }}
-            className="recruiter-card"
+            className={`recruiter-card ${isActive ? 'recruiter-card-active' : ''}`}
+            role="button"
+            tabIndex={0}
+            aria-label={`View ${recruiter.name} logo`}
+            onClick={onSelect}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onSelect()}
         >
             {!error ? (
                 <img
                     src={recruiter.logo}
                     alt={recruiter.name}
                     className={`recruiter-logo ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                    referrerPolicy="no-referrer"
+                    loading="lazy"
+                    width="200"
+                    height="128"
                     onLoad={() => setLoaded(true)}
                     onError={() => setError(true)}
                 />
@@ -56,6 +65,10 @@ const Recruiters = () => {
     const containerRef = useRef(null)
     const scrollRef = useRef(null)
     const isInView = useInView(containerRef, { once: true, margin: '-100px' })
+    const [activeIndex, setActiveIndex] = useState(2)
+    const [autoInterval, setAutoInterval] = useState(5000)
+    const touchStartX = useRef(null)
+    const touchEndX = useRef(null)
 
     /* AUTO SCROLL (unchanged) */
     useEffect(() => {
@@ -72,6 +85,29 @@ const Recruiters = () => {
 
         return () => clearInterval(interval)
     }, [])
+
+    /* ACTIVE ROTATION (new) */
+    useEffect(() => {
+        const id = setInterval(() => {
+            setActiveIndex((prev) => (prev + 1) % recruiters.length)
+        }, autoInterval)
+        return () => clearInterval(id)
+    }, [autoInterval])
+
+    const next = () => setActiveIndex((i) => (i + 1) % recruiters.length)
+    const prev = () => setActiveIndex((i) => (i - 1 + recruiters.length) % recruiters.length)
+
+    const onTouchStart = (e) => {
+        touchStartX.current = e.changedTouches[0].clientX
+    }
+    const onTouchEnd = (e) => {
+        touchEndX.current = e.changedTouches[0].clientX
+        const delta = (touchEndX.current ?? 0) - (touchStartX.current ?? 0)
+        if (Math.abs(delta) > 40) {
+            if (delta < 0) next()
+            else prev()
+        }
+    }
 
     return (
         <section id="recruiters" className="recruiters-section">
@@ -94,6 +130,42 @@ const Recruiters = () => {
                     </p>
                 </motion.div>
 
+                {/* ACTIVE LOGO DISPLAY */}
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.4 }}
+                    className="active-logo-stage-wrapper"
+                >
+                    <div
+                        className="active-logo-stage"
+                        onTouchStart={onTouchStart}
+                        onTouchEnd={onTouchEnd}
+                    >
+                        <button className="logo-nav prev" aria-label="Previous company" onClick={prev} />
+                        <AnimatePresence mode="wait">
+                            <motion.img
+                                key={recruiters[activeIndex].name}
+                                src={recruiters[activeIndex].logo}
+                                alt={recruiters[activeIndex].name}
+                                width="420"
+                                height="160"
+                                loading="lazy"
+                                referrerPolicy="no-referrer"
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.98 }}
+                                transition={{ duration: 0.35 }}
+                                className="active-logo-img"
+                            />
+                        </AnimatePresence>
+                        <button className="logo-nav next" aria-label="Next company" onClick={next} />
+                    </div>
+                    <div className="active-logo-caption">
+                        {recruiters[activeIndex].name}
+                    </div>
+                </motion.div>
+
                 {/* AUTO-SCROLL (NOW PERFECTLY CENTERED) */}
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -106,7 +178,16 @@ const Recruiters = () => {
                         className="recruiters-scroll-container"
                     >
                         {[...recruiters, ...recruiters].map((r, i) => (
-                            <RecruiterLogo key={`${r.name}-${i}`} recruiter={r} index={i} />
+                            <RecruiterLogo
+                                key={`${r.name}-${i}`}
+                                recruiter={r}
+                                index={i}
+                                isActive={recruiters[activeIndex].name === r.name}
+                                onSelect={() => {
+                                    const idx = recruiters.findIndex((x) => x.name === r.name)
+                                    if (idx >= 0) setActiveIndex(idx)
+                                }}
+                            />
                         ))}
                     </div>
                 </motion.div>
