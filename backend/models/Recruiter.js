@@ -15,4 +15,7 @@ const recruiterSchema = new mongoose.Schema({
     }
 });
 
+// Text index for search
+recruiterSchema.index({ name: 'text' });
+
 module.exports = mongoose.model('Recruiter', recruiterSchema);

@@ -80,7 +80,7 @@ const AdmissionsPage = () => {
 
     return (
         <div className="min-h-screen bg-[var(--color-background)] pt-32 pb-16">
-            <div className="container mx-auto px-4">
+            <div className="container px-4">
                 {/* Page Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -90,7 +90,7 @@ const AdmissionsPage = () => {
                     <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-4">
                         Admissions
                     </h1>
-                    <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+                    <p className="text-lg text-[var(--color-text-secondary)] w-full">
                         Begin your journey to excellence. Apply now for the upcoming academic session.
                     </p>
                 </motion.div>
@@ -206,7 +206,7 @@ const AdmissionsPage = () => {
                         </h2>
                     </div>
                     <div className="overflow-x-auto">
-                        <table className="w-full">
+                        <table className="centered-table">
                             <thead>
                                 <tr className="bg-[var(--color-background)]">
                                     <th className="text-left p-4 font-semibold text-[var(--color-text-primary)]">Program</th>
@@ -244,7 +244,7 @@ const AdmissionsPage = () => {
                         </h2>
                     </div>
                     <div className="overflow-x-auto">
-                        <table className="w-full">
+                        <table className="centered-table">
                             <thead>
                                 <tr className="bg-[var(--color-background)]">
                                     <th className="text-left p-4 font-semibold text-[var(--color-text-primary)]">Program</th>

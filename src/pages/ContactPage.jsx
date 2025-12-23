@@ -21,10 +21,10 @@ const ContactPage = () => {
 
     return (
         <div className="min-h-screen bg-[var(--color-background)] pt-32 pb-16">
-            <div className="container mx-auto px-4">
+            <div className="container px-4">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-4">Contact Us</h1>
-                    <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">We'd love to hear from you. Reach out for any queries.</p>
+                    <p className="text-lg text-[var(--color-text-secondary)] w-full">We'd love to hear from you. Reach out for any queries.</p>
                 </motion.div>
 
                 <div className="grid lg:grid-cols-2 gap-8">
@@ -33,7 +33,7 @@ const ContactPage = () => {
                         <h2 className="text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-6">Send us a Message</h2>
                         {submitted ? (
                             <div className="text-center py-12">
-                                <CheckCircle size={48} className="text-[var(--color-success)] mx-auto mb-4" />
+                                <CheckCircle size={48} className="text-[var(--color-success)] mb-4" />
                                 <p className="text-lg font-medium text-[var(--color-text-primary)]">Message Sent Successfully!</p>
                             </div>
                         ) : (
@@ -87,7 +87,7 @@ const ContactPage = () => {
                         {/* Map */}
                         <div className="bg-white rounded-2xl p-4 border border-[var(--color-border)] overflow-hidden">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.5!2d78.0!3d15.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTXCsDQ4JzAwLjAiTiA3OMKwMDAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3840.1910415155726!2d78.0071323!3d15.7410298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb5deb02adc9707%3A0x61f652c89f45b6ec!2sDr.K.V.Subba%20Reddy%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1766397286060!5m2!1sen!2sin"
                                 width="100%" height="250" style={{ border: 0, borderRadius: '12px' }} allowFullScreen="" loading="lazy"
                             />
                         </div>

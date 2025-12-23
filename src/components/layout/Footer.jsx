@@ -1,6 +1,8 @@
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowUp } from 'lucide-react'
 import { motion } from 'framer-motion'
 import './Footer.css'
+import './Header.css'
+import { BRAND } from '../../config/brand'
 
 const quickLinks = [
     { label: 'About Us', href: '#about' },
@@ -33,14 +35,16 @@ const Footer = () => {
                     {/* College Info */}
                     <div className="lg:col-span-1">
                         <div className="logo-container">
-                            <div className="logo-circle">
-                                <span className="logo-initial">K</span>
+                            <div className="brand-circle">
+                                <span className="brand-initial">{BRAND.initial}</span>
                             </div>
-                            <div className="college-name-wrapper">
-                                <h3 className="college-name">
-                                    Dr. K.V. Subba Reddy<br />
-                                    Institute of Technology
+                            <div className="brand-text">
+                                <h3 className="brand-name">
+                                    {BRAND.lines[0]}
                                 </h3>
+                                <p className="brand-subtitle">
+                                    {BRAND.lines[1]}
+                                </p>
                             </div>
                         </div>
                         <p className="college-description">

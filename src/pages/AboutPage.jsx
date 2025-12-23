@@ -90,7 +90,7 @@ const AboutPage = () => {
 
     return (
         <div className="min-h-screen bg-[var(--color-background)] pt-32 pb-16">
-            <div className="container mx-auto px-4">
+            <div className="container px-4">
                 {/* Page Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -100,7 +100,7 @@ const AboutPage = () => {
                     <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-4">
                         About KVSRIT
                     </h1>
-                    <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+                    <p className="text-lg text-[var(--color-text-secondary)] w-full">
                         Discover our legacy of excellence in technical education since 2008
                     </p>
                 </motion.div>
@@ -184,7 +184,7 @@ const AboutPage = () => {
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {sections.accreditation.items.map((item, index) => (
                             <div key={index} className="bg-[var(--color-background)] rounded-xl p-4 text-center">
-                                <Award size={32} className="text-[var(--color-accent)] mx-auto mb-3" />
+                                <Award size={32} className="text-[var(--color-accent)] mb-3" />
                                 <h4 className="font-semibold text-[var(--color-text-primary)] mb-1">{item.name}</h4>
                                 <span className="text-sm text-[var(--color-text-secondary)]">Since {item.year}</span>
                             </div>

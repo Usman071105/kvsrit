@@ -41,10 +41,10 @@ const CampusLifePage = () => {
 
     return (
         <div className="min-h-screen bg-[var(--color-background)] pt-32 pb-16">
-            <div className="container mx-auto px-4">
+            <div className="container px-4">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-4">Campus Life</h1>
-                    <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">Experience a vibrant campus with world-class facilities</p>
+                    <p className="text-lg text-[var(--color-text-secondary)] w-full">Experience a vibrant campus with world-class facilities</p>
                 </motion.div>
 
                 {/* Facilities */}

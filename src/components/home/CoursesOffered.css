@@ -5,8 +5,8 @@
 }
 
 .courses-container {
-    max-width: 1200px;
-    margin: 0 auto;
+
+    margin: 0;
     width: 100%;
 }
 
@@ -198,6 +198,5 @@
 }
 
 .pg-grid {
-    grid-template-columns: 1fr 1fr;
-    max-width: 600px;
+    margin-bottom: 2rem;
 }

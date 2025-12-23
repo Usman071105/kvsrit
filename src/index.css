@@ -45,6 +45,12 @@
   /* 40px */
   --space-6: 3rem;
   /* 48px */
+  --space-8: 4rem;
+  /* 64px */
+  --space-10: 5rem;
+  /* 80px */
+  --space-12: 6rem;
+  /* 96px */
 
   /* Accessibility */
   --touch-target-min: 44px;
@@ -93,27 +99,27 @@ a:hover {
 }
 
 img {
-  max-width: 100%;
+
   height: auto;
 }
 
 /* Utility Classes */
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1700px;
   margin: 0 auto;
-  padding: 0 var(--space-2);
+  padding: 0 var(--space-4);
 }
 
 @media (min-width: 640px) {
   .container {
-    padding: 0 var(--space-3);
+    padding: 0 var(--space-6);
   }
 }
 
 @media (min-width: 1024px) {
   .container {
-    padding: 0 var(--space-3);
+    padding: 0 var(--space-8);
   }
 }
 
@@ -475,8 +481,8 @@ img {
 .section-subtitle {
   text-align: center;
   color: var(--color-text-secondary);
-  max-width: 600px;
-  margin: 0 auto var(--space-5);
+
+  margin-bottom: var(--space-5);
 }
 
 /* Title underline decoration */

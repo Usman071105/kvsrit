@@ -33,7 +33,7 @@ const WhyKVSR = () => {
 
     return (
         <section id="about" className="section bg-[var(--color-surface)]">
-            <div className="container mx-auto px-4">
+            <div className="container px-4">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

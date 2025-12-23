@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="64" viewBox="0 0 160 64">
+  <rect width="160" height="64" rx="12" fill="#FFFFFF"/>
+  <rect width="160" height="64" rx="12" fill="url(#g)"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="160" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5D78E"/>
+      <stop offset="1" stop-color="#C4A77D"/>
+    </linearGradient>
+  </defs>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-family="Outfit, Inter, Arial, sans-serif" font-size="28" font-weight="700"
+        fill="#3D2914">TCS</text>
+</svg>

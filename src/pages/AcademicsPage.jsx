@@ -28,10 +28,10 @@ const AcademicsPage = () => {
 
     return (
         <div className="min-h-screen bg-[var(--color-background)] pt-32 pb-16">
-            <div className="container mx-auto px-4">
+            <div className="container px-4">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-4">Academics</h1>
-                    <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">Comprehensive academic programs designed for excellence</p>
+                    <p className="text-lg text-[var(--color-text-secondary)] w-full">Comprehensive academic programs designed for excellence</p>
                 </motion.div>
 
                 {/* Calendar */}

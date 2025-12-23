@@ -72,15 +72,15 @@ const Stats = () => {
     const isInView = useInView(containerRef, { once: true, margin: '-50px' })
 
     return (
-        <section className="relative py-16 -mt-16 z-20">
-            <div className="container mx-auto px-4">
-                <motion.div
-                    ref={containerRef}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6 }}
-                    className="bg-white rounded-2xl shadow-xl border border-[var(--color-border)] overflow-hidden"
-                >
+        <section className="relative z-20 -mt-16">
+            <motion.div
+                ref={containerRef}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6 }}
+                className="bg-white shadow-xl border-y border-[var(--color-border)] w-full"
+            >
+                <div className="container px-4">
                     <div className="grid grid-cols-2 lg:grid-cols-4">
                         {stats.map((stat, index) => (
                             <motion.div
@@ -93,7 +93,7 @@ const Stats = () => {
                             >
                                 {/* Icon */}
                                 <div
-                                    className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center"
+                                    className="w-14 h-14 rounded-2xl mb-4 flex items-center justify-center"
                                     style={{ backgroundColor: `${stat.color}15` }}
                                 >
                                     <stat.icon size={28} style={{ color: stat.color }} />
@@ -122,8 +122,8 @@ const Stats = () => {
                             </motion.div>
                         ))}
                     </div>
-                </motion.div>
-            </div>
+                </div>
+            </motion.div>
         </section>
     )
 }

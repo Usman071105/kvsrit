@@ -652,6 +652,29 @@ const DepartmentDetail = () => {
         window.scrollTo({ top: 0, behavior: 'instant' })
 
         const fetchDepartmentData = async () => {
+            const start = Date.now()
+            const setStatus = (key, value) => {
+                window.__kvsritContent = window.__kvsritContent || { manifest: {}, events: [] }
+                window.__kvsritContent.manifest[key] = value
+                window.__kvsritContent.events.push({ ts: Date.now(), key, value })
+            }
+            const watchdog = setTimeout(() => {
+                setError('Timeout loading content')
+                setLoading(false)
+                setStatus('watchdog_timeout', true)
+            }, 10000)
+            const fetchWithTimeout = async (url, options = {}, timeoutMs = 6000) => {
+                const controller = new AbortController()
+                const id = setTimeout(() => controller.abort(), timeoutMs)
+                try {
+                    const res = await fetch(url, { ...options, signal: controller.signal })
+                    clearTimeout(id)
+                    return res
+                } catch (e) {
+                    clearTimeout(id)
+                    throw e
+                }
+            }
             try {
                 setLoading(true)
 
@@ -704,18 +727,21 @@ const DepartmentDetail = () => {
                 }
 
                 // For other departments, fetch from API
-                const deptResponse = await fetch(`http://localhost:5000/api/departments/code/${code}`)
+                const deptResponse = await fetchWithTimeout(`http://localhost:5000/api/departments/code/${code}`)
                 if (!deptResponse.ok) throw new Error('Department not found')
                 const deptData = await deptResponse.json()
                 setDepartment(deptData)
+                setStatus('department', true)
 
                 // Fetch faculty for this department
-                const facultyResponse = await fetch(`http://localhost:5000/api/faculty`)
+                const facultyResponse = await fetchWithTimeout(`http://localhost:5000/api/faculty`)
                 const facultyData = await facultyResponse.json()
                 const filteredFaculty = facultyData.filter(f => f.department === deptData.name)
                 setFaculty(filteredFaculty)
+                setStatus('faculty', true)
 
                 setLoading(false)
+                setStatus('total_time_ms', Date.now() - start)
             } catch (err) {
                 // If API fails and it's CSE, still show static data
                 if (code.toUpperCase() === 'CSE') {
@@ -761,7 +787,9 @@ const DepartmentDetail = () => {
                 }
                 setError(err.message)
                 setLoading(false)
+                setStatus('error', err.message)
             }
+            clearTimeout(watchdog)
         }
 
         fetchDepartmentData()
@@ -787,7 +815,7 @@ const DepartmentDetail = () => {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[var(--color-background)]">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin mb-4"></div>
                     <p className="text-[var(--color-text-secondary)]">Loading department details...</p>
                 </div>
             </div>
@@ -815,7 +843,7 @@ const DepartmentDetail = () => {
         <div className="department-page min-h-screen bg-[var(--color-background)] pt-40 md:pt-48">
             {/* Header */}
             <div className="bg-white border-b border-[var(--color-border)] shadow-sm">
-                <div className="container mx-auto px-6 md:px-8 py-10 md:py-12">
+                <div className="container px-6 md:px-8 py-10 md:py-12">
                     <button
                         onClick={() => navigate('/')}
                         className="flex items-center gap-2 text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] mb-8 transition-colors font-medium"
@@ -863,7 +891,7 @@ const DepartmentDetail = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-6 md:px-8 py-12 md:py-16">
+            <div className="container px-6 md:px-8 py-12 md:py-16">
                 <div className="grid lg:grid-cols-4 gap-8 lg:gap-10">
                     {/* Sidebar Navigation - Only for departments with static data */}
                     {hasStaticData && department.navigationItems && (
@@ -1149,7 +1177,7 @@ const DepartmentDetail = () => {
                                             className="p-4 border border-[var(--color-border)] rounded-xl hover:border-[var(--color-primary)] transition-colors flex flex-col items-center text-center"
                                         >
                                             <div className="flex flex-col items-center gap-3 w-full">
-                                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center text-white font-semibold flex-shrink-0 mx-auto">
+                                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center text-white font-semibold flex-shrink-0">
                                                     {member.name.split(' ').map(n => n[0]).join('')}
                                                 </div>
                                                 <div className="flex-1 min-w-0 w-full">
